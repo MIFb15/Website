@@ -47,8 +47,24 @@
 					</div>
 					<div class="form-group">
 						<input type="submit" name="login" class="btn btn-primary btn-block" value="Login" />
+                   
 					</div>
 				</form>
+                <?php
+session_start();
+if($_POST['login']){
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+$p=mysql_query("select * from admin where username='$username' and password='$password' ");
+if($rs=mysql_fetch_array($p)){
+	$_SESSION['admin']=$username;
+	echo"<script> location='.?page=home';</script>";
+}else{
+	echo"<script> alert('Login Gagal');</script>";
+}
+}
+
+?>
 			</div>
 		</div>
 	
